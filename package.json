@@ -1,0 +1,86 @@
+{
+  "name": "@kodemo/player",
+  "version": "0.3.1",
+  "description": "React component for viewing Kodemo documents.",
+  "homepage": "https://kodemo.com",
+  "author": {
+    "name": "Hakim El Hattab",
+    "email": "hakim.elhattab@gmail.com",
+    "web": "https://hakim.se"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kodemoapp/player"
+  },
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/kodemo-player.es.js",
+  "types": "./dist/types/KodemoPlayer.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/kodemo-player.es.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc",
+    "preview": "vite preview",
+    "test": "NODE_ENV=test yarn run vitest"
+  },
+  "dependencies": {
+    "@codemirror/lang-cpp": "^6.0.2",
+    "@codemirror/lang-css": "^6.0.1",
+    "@codemirror/lang-html": "^6.1.3",
+    "@codemirror/lang-java": "^6.0.1",
+    "@codemirror/lang-javascript": "^6.1.1",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lang-markdown": "^6.0.4",
+    "@codemirror/lang-php": "^6.0.1",
+    "@codemirror/lang-python": "^6.0.4",
+    "@codemirror/lang-rust": "^6.0.1",
+    "@codemirror/lang-xml": "^6.0.1",
+    "@codemirror/legacy-modes": "^6.2.0",
+    "@kodemo/util": "0.3.1",
+    "@lezer/highlight": "^1.1.2",
+    "@types/diff": "^5.0.2",
+    "animejs": "^3.2.1",
+    "codemirror": "^6.0.1",
+    "color": "^4.2.3",
+    "diff": "^5.1.0",
+    "immer": "^9.0.16",
+    "katex": "^0.16.3",
+    "lodash-es": "^4.17.21",
+    "md5": "^2.3.0",
+    "mitt": "^3.0.0",
+    "react-intersection-observer": "^9.4.0",
+    "zustand": "^4.1.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@honkhonk/vite-plugin-svgr": "^1.1.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/animejs": "^3.1.6",
+    "@types/lodash": "^4.14.187",
+    "@types/md5": "^2.3.2",
+    "@types/styled-components": "^5.1.26",
+    "@vitejs/plugin-react": "3.0.0",
+    "happy-dom": "^7.6.7",
+    "prettier": "2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.8.4",
+    "vite": "4.0.2",
+    "vitest": "^0.26.0",
+    "vitest-canvas-mock": "^0.2.2"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6"
+  }
+}

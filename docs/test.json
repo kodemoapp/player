@@ -1,0 +1,47 @@
+{
+  "story": "<h1>Heading 1</h1><p></p><p>Paragraph 1.</p><p></p><p>Paragraph 2. <span data-effect-id=\"effect-1661867022401-1\" data-effect-subject=\"s2\" data-effect-version=\"s2version1\" data-effect-payload=\"\">Effect &gt; s2v1</span>.</p><p></p><p>Paragraph 3. <span data-effect-id=\"effect-1662534411358-1\" data-effect-subject=\"s1\" data-effect-version=\"s1v2\" data-effect-payload=\"\">Effect &gt; s1v2</span>.</p><p></p><p>Paragraph 4.</p><p></p><p>Paragraph 5. <span data-effect-id=\"effect-1662534442026-4\" data-effect-subject=\"logo\" data-effect-version=\"l1\" data-effect-payload=\"\">Effect &gt; image</span>.</p>",
+  "subjectIndex": ["logo", "s1", "s2"],
+  "subjects": {
+    "s1": {
+      "created_at": 1661513778462,
+      "versions": {
+        "s1v1": {
+          "value": "s1v1"
+        },
+        "s1v2": {
+          "value": "s1v2"
+        },
+        "s1v3": {
+          "value": "s1v3"
+        }
+      },
+      "versionIndex": ["s1v1", "s1v2", "s1v3"],
+      "type": "code",
+      "name": "s1.js"
+    },
+    "s2": {
+      "created_at": 1661513824344,
+      "versions": {
+        "s2version1": {
+          "value": "s2v1"
+        }
+      },
+      "versionIndex": ["s2version1"],
+      "type": "code",
+      "name": "s2.js"
+    },
+    "logo": {
+      "name": "image.png",
+      "type": "image",
+      "versions": {
+        "l1": {
+          "width": 1280,
+          "height": 720,
+          "value": "https://d1835mevib0k1p.cloudfront.net/portfolio/v2/images/reveal-js.png?1"
+        }
+      },
+      "versionIndex": ["l1"]
+    }
+  },
+  "title": "Untitled"
+}

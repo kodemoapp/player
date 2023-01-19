@@ -1,0 +1,99 @@
+{
+  "id": "1118be77-bcd0-40da-9cce-e5e9da8c8a7c",
+  "title": "Tutorial",
+  "story": "<h1 id=\"welcome-to-kodemo\"><span data-effect-id=\"effect-1661761576722-1\" data-effect-type=\"invisible\" data-effect-subject=\"f34285ad4b29ae5d40742b1c210f9005\" data-effect-version=\"27e1f0698e96a266d58fe0d5f255a8a6\">Welcome to Kodemo</span> 👋</h1><p>This is a work in progress tool for writing more engaging code tutorials, walkthroughs and documentation.</p><h3 id=\"story-and-subject\"><span data-effect-id=\"effect-1661769118940-2\" data-effect-type=\"invisible\" data-effect-subject=\"d1d6b0d2074d4417a214b119dfe358e6\" data-effect-version=\"fc113a90249d32dbff43affb2dd540e9\">Story and Subject</span></h3><p>The Kodemo format splits content into two distinct areas. What you&#x27;re reading here is the <em><span data-effect-id=\"effect-1661765708254-2\" data-effect-subject=\"d1d6b0d2074d4417a214b119dfe358e6\" data-effect-version=\"fc113a90249d32dbff43affb2dd540e9\" data-effect-payload=\"{&quot;imageHighlights&quot;:[[0.033288741700246344,0.08482561294460066,0.372742548574971,0.8445562626412115]]}\">story</span></em>. This is where you&#x27;ll do all your writing.</p><p>The tabs on the right are the <em><span data-effect-id=\"effect-1661765738452-3\" data-effect-subject=\"d1d6b0d2074d4417a214b119dfe358e6\" data-effect-version=\"fc113a90249d32dbff43affb2dd540e9\" data-effect-payload=\"{&quot;imageHighlights&quot;:[[0.3966344193027391,0.08640422278131321,0.5763414196453334,0.8492920921513493]]}\">subjects</span></em> you&#x27;re writing about. We currently support code, image and website (iframe) subjects but the plan is to add more content types in the future.</p><h3 id=\"effects\">Effects</h3><p>Any part of your story can be <span data-effect-id=\"effect-1661761576722-2\" data-effect-subject=\"d5ef513d14ff29676c3a072d6441ab5b\" data-effect-version=\"321143703a9901bc2a4eba661c26c3a1\">linked to a subject</span>. This will make the subject appear when the viewer reads the corresponding part of the story. We call these links <em>effects</em>.</p><p>Effects can also be used to bring a specific part of a subject into view. For example, by scrolling to a <span data-effect-id=\"effect-1661761576722-3\" data-effect-subject=\"d5ef513d14ff29676c3a072d6441ab5b\" data-effect-version=\"923c74307b02c1c7cc2ff5ee90443e11\" data-effect-payload=\"{&quot;codeHighlights&quot;:&quot;1-2, 12&quot;}\">specific line of code</span> or highlighting a point of interest in an image.</p><h2 id=\"writing-about-code\"><span data-effect-id=\"effect-1661761576722-4\" data-effect-type=\"invisible\" data-effect-subject=\"adf8037cfc597d9001d1f2dcab184e7a\" data-effect-version=\"c76fd2b94eccc7406ed05c6d85526c09\">Writing about code</span></h2><p>Kodemo makes it trivial to walk your viewers through code and animate between code changes. Let&#x27;s take a look at the JSON that makes up a Kodemo document as an example. We can see where the <span data-effect-id=\"effect-1661761576722-5\" data-effect-subject=\"adf8037cfc597d9001d1f2dcab184e7a\" data-effect-version=\"8597925bf5cec36c91cd6bb4d70c2c1f\" data-effect-payload=\"{&quot;codeHighlights&quot;:&quot;3&quot;}\">story is defined</span> and right below that we&#x27;ve got our list of subjects. </p><p>There are <span data-effect-id=\"effect-1661761576722-6\" data-effect-subject=\"adf8037cfc597d9001d1f2dcab184e7a\" data-effect-version=\"c76fd2b94eccc7406ed05c6d85526c09\" data-effect-payload=\"{&quot;codeHighlights&quot;:&quot;6-34&quot;}\">three different subjects</span> available in this example. Each subject may have any number of context-specific fields such as width and height for images or a URL value for websites.</p><p>Each subject can exist in multiple different <span data-effect-id=\"effect-1661761576722-7\" data-effect-subject=\"adf8037cfc597d9001d1f2dcab184e7a\" data-effect-version=\"c76fd2b94eccc7406ed05c6d85526c09\" data-effect-payload=\"{&quot;codeHighlights&quot;:&quot;9, 20, 29&quot;}\">versions</span>. A version is a sequential variant of the same asset. For example, each version could <span data-effect-id=\"effect-1661761576722-8\" data-effect-subject=\"adf8037cfc597d9001d1f2dcab184e7a\" data-effect-version=\"0d8ada67af780fa4d67ae440dcca8848\" data-effect-payload=\"{&quot;codeHighlights&quot;:&quot;20-33&quot;}\">add or remove lines of code</span> from a code subject.</p><h2 id=\"image-highlights\"><span data-effect-id=\"effect-1661766081039-5\" data-effect-type=\"invisible\" data-effect-subject=\"d2da789d065904e3dc43ce2676574642\" data-effect-version=\"678c31c05c800852dbe7ac27692bef3c\">Image highlights</span></h2><p>You can walk your viewers through different parts of an image by creating image highlights. </p><p><span data-effect-id=\"effect-1661766292034-8\" data-effect-subject=\"d2da789d065904e3dc43ce2676574642\" data-effect-version=\"678c31c05c800852dbe7ac27692bef3c\" data-effect-payload=\"{&quot;imageHighlights&quot;:[[0.39796482779937853,0.09468170829975826,0.5518228700645854,0.8267526188557615]]}\">Here</span>, we&#x27;re looking at the empty state of the Kodemo editor. The UI tells the user to either upload new files via drag and drop or by clicking the &quot;browse files&quot; button.</p><p>If you pay close attention, you can see a list of the currently supported file types at the <span data-effect-id=\"effect-1661766341440-9\" data-effect-subject=\"d2da789d065904e3dc43ce2676574642\" data-effect-version=\"678c31c05c800852dbe7ac27692bef3c\" data-effect-payload=\"{&quot;imageHighlights&quot;:[[0.4146236314239698,0.8618049959709911,0.515381737135792,0.06285253827558421]]}\">bottom of the page</span>.</p><h2 id=\"how-can-i-use-kodemo\"><span data-effect-id=\"effect-1661768647442-1\" data-effect-type=\"invisible\" data-effect-subject=\"f34285ad4b29ae5d40742b1c210f9005\" data-effect-version=\"27e1f0698e96a266d58fe0d5f255a8a6\">How can I use Kodemo?</span></h2><p>Kodemo documents can be authored at <a href=\"https://kodemo.com/\">kodemo.com</a>. Once you have created a document, you can publish it on kodemo.com or host it on your own domain. Self-hosting is made possible via the @kodemo/player package. <a href=\"https://kodemo.com/docs/player\">Learn more about publishing</a>.</p><h2 id=\"whats-next\">What&#x27;s next</h2><p>Kodemo is currently in public beta and being rapidly improved on. Beyond enhancements and bug fixes, the next major update will be to provide a self-hosted version of the editor.</p>",
+  "subjectIndex": [
+    "f34285ad4b29ae5d40742b1c210f9005",
+    "d1d6b0d2074d4417a214b119dfe358e6",
+    "d5ef513d14ff29676c3a072d6441ab5b",
+    "adf8037cfc597d9001d1f2dcab184e7a",
+    "d2da789d065904e3dc43ce2676574642"
+  ],
+  "subjects": {
+    "adf8037cfc597d9001d1f2dcab184e7a": {
+      "created_at": 1659976876235,
+      "versions": {
+        "8597925bf5cec36c91cd6bb4d70c2c1f": {
+          "value": "{\n  \"title\": \"Demo Document\",\n  \"story\": \"<h1>Configuring reveal.js</h1><h2><span data-effect-id=\\\"1\\\">Initialization</span>...\",\n  \"subjectIndex\": [],\n  \"subjects\": {\n    ...\n  }\n}"
+        },
+        "0d8ada67af780fa4d67ae440dcca8848": {
+          "created_at": 1659982456531,
+          "value": "{\n  \"title\": \"Demo Document\",\n  \"story\": \"<h1>Configuring reveal.js</h1><h2><span data-effect-id=\\\"1\\\">Initialization</span>...\",\n  \"subjectIndex\": [\"init\", \"logo\", \"website\"],\n  \"subjects\": {\n    \"logo\": {\n      \"name\": \"reveal.png\",\n      \"type\": \"image\",\n      \"versions\": {\n        \"l1\": {\n          \"width\": 1280,\n          \"height\": 720,\n          \"value\": \"https://d1835mevib0k1p.cloudfront.net/portfolio/v2/images/reveal-js.png?1\"\n        }\n      }\n    },\n    \"init\": {\n      \"name\": \"initialization.html\",\n      \"type\": \"code\",\n      \"versions\": {\n        \"i1\": {\n          \"value\": \"<script src=\\\"dist/reveal.js\\\"></script>\\n<script>\\n  Reveal.initialize({\\n    transition: 'none'\\n  });\\n</script>\"\n        },\n        \"i2\": {\n          \"value\": \"<script src=\\\"dist/reveal.js\\\"></script>\\n<script>\\n  Reveal.initialize({\\n    transition: 'none'\\n  }).then(() => {\\n    // reveal.js is ready\\n  });\\n</script>\"\n        },\n        \"i3\": {\n          \"value\": \"<script src=\\\"dist/reveal.js\\\"></script>\\n<script src=\\\"plugins/notes/notes.js\\\"></script>\\n<script src=\\\"plugins/markdown/markdown.js\\\"></script>\\n<script>\\n  Reveal.initialize({\\n    transition: 'none'\\n    plugins: [ RevealNotes, RevealMarkdown ]\\n  }).then(() => {\\n    if( Reveal.hasPlugin('notes') ) {\\n      Reveal.getPlugin('notes').open();\\n    }\\n  });\\n</script>\"\n        },\n        \"i4\": {\n          \"value\": \"<head>\\n  <title>reveal.js demo</title>\\n</head>\\n<script src=\\\"dist/reveal.js\\\"></script>\\n<script src=\\\"plugins/notes/notes.js\\\"></script>\\n<script src=\\\"plugins/markdown/markdown.js\\\"></script>\\n<script>\\n  Reveal.initialize({\\n    transition: 'none'\\n    plugins: [ RevealNotes, RevealMarkdown ]\\n  }).then(() => {\\n    if( Reveal.hasPlugin('notes') ) {\\n      Reveal.getPlugin('notes').open();\\n    }\\n  });\\n</script>\"\n        }\n      }\n    },\n    \"website\": {\n      \"name\": \"hakim.se\",\n      \"type\": \"iframe\",\n      \"versions\": {\n        \"w1\": {\n          \"value\": \"https://hakim.se\"\n        }\n      }\n    }\n  }\n}"
+        },
+        "c76fd2b94eccc7406ed05c6d85526c09": {
+          "created_at": 1659982456531,
+          "value": "{\n  \"title\": \"Demo Document\",\n  \"story\": \"<h1>Configuring reveal.js</h1><h2><span data-effect-id=\\\"1\\\">Initialization</span>...\",\n  \"subjectIndex\": [\"init\", \"logo\", \"website\"],\n  \"subjects\": {\n    \"logo\": {\n      \"name\": \"reveal.png\",\n      \"type\": \"image\",\n      \"versions\": {\n        \"l1\": {\n          \"width\": 1280,\n          \"height\": 720,\n          \"value\": \"https://d1835mevib0k1p.cloudfront.net/portfolio/v2/images/reveal-js.png?1\"\n        }\n      }\n    },\n    \"init\": {\n      \"name\": \"initialization.html\",\n      \"type\": \"code\",\n      \"versions\": {\n        \"i1\": {\n          \"value\": \"<script src=\\\"dist/reveal.js\\\"></script>\\n<script>\\n  Reveal.initialize({\\n    transition: 'none'\\n  });\\n</script>\"\n        }\n      }\n    },\n    \"website\": {\n      \"name\": \"hakim.se\",\n      \"type\": \"iframe\",\n      \"versions\": {\n        \"w1\": {\n          \"value\": \"https://hakim.se\"\n        }\n      }\n    }\n  }\n}"
+        }
+      },
+      "type": "code",
+      "name": "kodemo-document.json",
+      "versionIndex": [
+        "8597925bf5cec36c91cd6bb4d70c2c1f",
+        "c76fd2b94eccc7406ed05c6d85526c09",
+        "0d8ada67af780fa4d67ae440dcca8848"
+      ]
+    },
+    "d5ef513d14ff29676c3a072d6441ab5b": {
+      "created_at": 1659977730405,
+      "versions": {
+        "321143703a9901bc2a4eba661c26c3a1": {
+          "value": "import { KodemoPlayer } from '@kodemo/player';\nimport json from 'my-kodemo-document.json';\n\nexport default function App() {\n  return (\n    <KodemoPlayer json={json}></KodemoPlayer>\n  );\n}"
+        },
+        "923c74307b02c1c7cc2ff5ee90443e11": {
+          "created_at": 1659983832462,
+          "value": "import React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport { KodemoPlayer } from '@kodemo/player';\nimport json from 'my-kodemo-document.json';\n\nexport default function App() {\n  return (\n    <KodemoPlayer json={json}></KodemoPlayer>\n  );\n}\n\nReactDOM.createRoot(document.getElementById('root')).render(<App />);"
+        }
+      },
+      "type": "code",
+      "name": "kodemo-player.js",
+      "versionIndex": [
+        "321143703a9901bc2a4eba661c26c3a1",
+        "923c74307b02c1c7cc2ff5ee90443e11"
+      ]
+    },
+    "f34285ad4b29ae5d40742b1c210f9005": {
+      "created_at": 1659984051229,
+      "versions": {
+        "27e1f0698e96a266d58fe0d5f255a8a6": {
+          "value": "https://res.cloudinary.com/kodemo/image/upload/v1661413292/crzpbfldbnucmdof4tfq.png",
+          "format": "png",
+          "width": 540,
+          "height": 858
+        }
+      },
+      "type": "image",
+      "name": "logo.png",
+      "versionIndex": ["27e1f0698e96a266d58fe0d5f255a8a6"]
+    },
+    "d1d6b0d2074d4417a214b119dfe358e6": {
+      "created_at": 1661767138081,
+      "versions": {
+        "fc113a90249d32dbff43affb2dd540e9": {
+          "value": "https://res.cloudinary.com/kodemo/image/upload/v1661767137/u8ngyzfxecbwtlgjw4ct.png",
+          "format": "png",
+          "width": 2788,
+          "height": 1844
+        }
+      },
+      "versionIndex": ["fc113a90249d32dbff43affb2dd540e9"],
+      "type": "image",
+      "name": "layout.png"
+    },
+    "d2da789d065904e3dc43ce2676574642": {
+      "created_at": 1661767140366,
+      "versions": {
+        "678c31c05c800852dbe7ac27692bef3c": {
+          "value": "https://res.cloudinary.com/kodemo/image/upload/v1661767139/bos8uuu9tceha70hcd7r.png",
+          "format": "png",
+          "width": 2788,
+          "height": 1844
+        }
+      },
+      "versionIndex": ["678c31c05c800852dbe7ac27692bef3c"],
+      "type": "image",
+      "name": "empty-state.png"
+    }
+  },
+  "version": "0.1.6",
+  "updated_at": 1666075072214
+}
