@@ -71,6 +71,8 @@ export function Root(props: any) {
   const dimensions = useKodemoState(KodemoStateSelectors.dimensions);
   const playheadFixedTop = useKodemoState(KodemoStateSelectors.playheadFixedTop);
   const activeTimelineSegmentId = useKodemoState(KodemoStateSelectors.activeTimelineSegmentId);
+
+  // Used (sparingly) to force a re-render of all timeline segments
   const [segmentInvalidation, invalidateSegments] = React.useState(0);
 
   const theme = useTheme();
