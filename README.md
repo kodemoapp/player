@@ -6,10 +6,10 @@
 
 # Kodemo
 
-[Kodemo](https://kodemo.com) is a brand new format for writing more engaging technical documentation. 
-- 🔗 [Learn more on the website](https://komdeo.com)  
-- 👉 [Try a live demo](https://kodemo.com/docs/what-is-kodemo)  
-- 👀 [Follow @kodemoapp](https://twitter.com/kodemoapp)  
+[Kodemo](https://kodemo.com) is a brand new format for writing more engaging technical documentation.
+- 🔗 Learn more at [kodemo.com](https://komdeo.com)
+- 👉 Try a [live demo](https://kodemo.com/docs/what-is-kodemo)
+- 👀 Follow [@kodemoapp](https://twitter.com/kodemoapp)
 
 ## Kodemo Player
 
