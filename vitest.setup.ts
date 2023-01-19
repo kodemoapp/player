@@ -4,10 +4,12 @@ import { setupIntersectionMocking, resetIntersectionMocking } from 'react-inters
 
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
+// @ts-expect-error
 beforeEach(() => {
   setupIntersectionMocking(vi.fn);
 });
 
+// @ts-expect-error
 afterEach(() => {
   resetIntersectionMocking();
 });

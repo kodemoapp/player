@@ -1,13 +1,13 @@
+import { Tooltip, useNotifications } from '@kodemo/util';
+import { CheckIcon, ClipboardCopyIcon } from '@radix-ui/react-icons';
 import React from 'react';
-import * as Subject from './Subject';
-import useKodemoState, { DocumentSelectors, ISubject, IVersion, KodemoStateSelectors } from '../hooks/useKodemoState';
-import useKodemoConfig from '../hooks/useKodemoConfig';
+import { Effect } from 'src/KodemoPlayer';
 import styled from 'styled-components';
 import { CodeEditor } from '../components/CodeEditor';
-import { Tooltip, useNotifications } from '@kodemo/util';
+import useKodemoConfig from '../hooks/useKodemoConfig';
+import useKodemoState, { DocumentSelectors, ISubject, KodemoStateSelectors } from '../hooks/useKodemoState';
 import { diffCode } from '../util/code';
-import { ClipboardCopyIcon, CheckIcon } from '@radix-ui/react-icons';
-import { Effect } from 'src/KodemoPlayer';
+import * as Subject from './Subject';
 
 const StyledContent = styled(Subject.Content)`
   .ko-subject-version {

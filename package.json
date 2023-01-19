@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/kodemoapp/player"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "files": [
     "dist"
   ],

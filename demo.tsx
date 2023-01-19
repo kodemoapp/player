@@ -3,21 +3,23 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import demoJSON from './docs/tutorial.json';
 import { KodemoMenu, Dropdown } from '@kodemo/util';
-import { KodemoPlayer, KodemoLayout, Pagination } from '/src/KodemoPlayer';
+import { KodemoPlayer, Pagination } from './src/KodemoPlayer';
+import { KodemoDocument } from './src/KodemoPlayer';
 
-(window.rr = window.rr || ReactDOM.createRoot(document.getElementById('root'))).render(
+// @ts-ignore
+(window.rr = window.rr || ReactDOM.createRoot(document.getElementById('root')!)).render(
   <React.StrictMode>
     <Demo></Demo>
   </React.StrictMode>
 );
 
 export default function Demo() {
-  const [json, setJSON] = React.useState(demoJSON);
+  const [json, setJSON] = React.useState<KodemoDocument | undefined>(demoJSON);
 
   React.useEffect(() => {
     let handleKeyUp = ({ key }) => {
       if (key === '?') {
-        setJSON(json === demoJSON ? {} : demoJSON);
+        setJSON(json === demoJSON ? undefined : demoJSON);
       }
     };
 
@@ -37,14 +39,15 @@ export default function Demo() {
       // layout={KodemoLayout.FIXED}
       // width={1200}
       // height={500}
-      theme={
-        {
-          // colors: {
-          //   active: 'red'
-          // }
-        }
-      }
+
+      // theme={{
+      //   colors: {
+      //     active: 'red',
+      //   },
+      // }}
+
       menu={<Menu />}
+
       // copyCode={false}
     ></KodemoPlayer>
   );
@@ -52,7 +55,7 @@ export default function Demo() {
 
 function Menu() {
   return (
-    <KodemoMenu.Root>
+    <KodemoMenu.Root getDocumentJSON={() => {}} setDocumentJSON={() => {}} onKeyboardSaveShortcut={() => {}}>
       <KodemoMenu.Dropdown>
         <Dropdown.Item onSelect={() => {}}>Example</Dropdown.Item>
       </KodemoMenu.Dropdown>

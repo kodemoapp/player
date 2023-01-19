@@ -1,7 +1,7 @@
 import { theme as defaultTheme, Theme, KodemoMenu, Tooltip, Toast, NotificationsProvider } from '@kodemo/util';
 import merge from 'lodash/merge';
 import throttle from 'lodash/throttle';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import PlayerFooter from './components/PlayerFooter';
@@ -159,7 +159,7 @@ type KodemoPlayerProps = {
   /**
    * An optional menu element to render as part of the player.
    */
-  menu?: typeof KodemoMenu.Root;
+  menu?: ReactNode;
 
   /**
    * Used to adjust the behavior of the player in different environments.
@@ -346,7 +346,7 @@ export interface IPlayerRendererProps {
    * Slot for an optional menu element that should be added next
    * to the story.
    */
-  menu?: typeof KodemoMenu.Root;
+  menu?: ReactNode;
 }
 
 function PlayerRenderer({ menu }: IPlayerRendererProps) {
