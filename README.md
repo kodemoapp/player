@@ -53,7 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-### Development
+### Development Setup
 
 If you want to make changes to the @kodemo/player source here's how:
 1. Clone this repository
@@ -69,6 +69,15 @@ yarn test
 # build a new release
 yarn build
 ```
+
+### Terminology
+
+If you're planning to work with the Kodemo source here are a few key concepts and names that are good to know about.
+- The `story` is the main body text of the documentation.
+- `Subjects` are the individual pieces of content that the documentation covers. A subject can be an image, code, etc.
+- Subjects can have multiple `versions`. Each version represents a variant of the same subject. For example, multiple versions are used to animate lines being added or removed from code.
+- The `timeline` is the bar with vertical line segments that indicate which subject that will become active when scrolling.
+- `Effects` are keywords within the story that are linked to a specific subject version. They form the relationship between the story and subjects.
 
 
 --- 
