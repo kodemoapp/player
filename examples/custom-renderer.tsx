@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../../../assets/global.css';
-import json from '../../../docs/docs-player.json';
+import '../demo.css';
+import json from '../docs/tutorial.json';
 import { KodemoPlayer, Story, Subjects, Timeline, useKodemoState, DocumentSelectors } from '../src/KodemoPlayer';
 
 // @ts-ignore
