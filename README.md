@@ -17,7 +17,7 @@ This repo contains the @kodemo/player package which is responsible for rendering
 
 ### Installation
 
-To install @kodemo/player I recommend following the docs at <https://kodemo.com/docs/player>
+To install @kodemo/player I recommend following the docs at <https://kodemo.com/docs/player>.
 
 TLDR?
 
@@ -53,7 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-## Development
+### Development
 
 If you want to make changes to the @kodemo/player source here's how:
 1. Clone this repository
@@ -61,7 +61,7 @@ If you want to make changes to the @kodemo/player source here's how:
 3. Run `yarn dev` to start the development server
 4. Open the URL from the dev server output and 💥
 
-### Other scripts
+#### Other scripts
 ```shell
 # run tests
 yarn test
@@ -71,6 +71,7 @@ yarn build
 ```
 
 
-## License
-
-Copyright © 2023 Hakim El Hattab, https://hakim.se
+--- 
+<div align="center">
+  MIT licensed | Copyright © 2022-2023 Hakim El Hattab, https://hakim.se
+</div>
