@@ -215,14 +215,11 @@ const StyledContentBase = styled.article`
   }
 `;
 
-export const StyledContent = styled(StyledContentBase)({
-  code: INLINE_STYLES.code,
-  a: INLINE_STYLES.link,
-});
+export const StyledContent = styled(StyledContentBase)({ ...(INLINE_STYLES as any) });
 
-export function Root({ children, ...props }) {
-  const storyRef = React.useRef(null);
-  const storyInnerRef = React.useRef(null);
+export function Root({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  const storyRef = React.useRef<HTMLDivElement>(null);
+  const storyInnerRef = React.useRef<HTMLDivElement>(null);
 
   const playheadMeasurements = useKodemoState(KodemoStateSelectors.playheadMeasurements);
   const scrollContainer = useKodemoState(KodemoStateSelectors.scrollContainer);
@@ -240,13 +237,14 @@ export function Root({ children, ...props }) {
   // in order to reach the last timeline segment
   React.useEffect(() => {
     const lastSegment = segmentsOrder[segmentsOrder.length - 1];
+
     if (lastSegment) {
       const viewportHeight = playerDimensions.height + playerOffset.y;
       const padding = viewportHeight - (playheadMeasurements?.top || 0) - theme.timelinePlayheadSize;
 
-      storyRef.current.style.paddingBottom = Math.max(padding, 0) + 'px';
+      storyRef.current!.style.paddingBottom = Math.max(padding, 0) + 'px';
     } else {
-      storyRef.current.style.paddingBottom = '';
+      storyRef.current!.style.paddingBottom = '';
     }
 
     // Once we have calculated scroll padding, flag that player layout is complete
@@ -257,22 +255,22 @@ export function Root({ children, ...props }) {
 
   // Calculate story bounding box (including scroll padding)
   React.useEffect(() => {
-    useKodemoState.setState({
-      storyMeasurements: getBoundingClientRelativeToParent(
-        storyRef.current,
-        scrollContainer?.parentNode || scrollContainer
-      ),
-    });
+    const parent = scrollContainer?.parentElement || scrollContainer;
+    if (storyRef.current && parent) {
+      useKodemoState.setState({
+        storyMeasurements: getBoundingClientRelativeToParent(storyRef.current, parent),
+      });
+    }
   }, [playerDimensions, theme.storyPaddingH, theme.storyPaddingV]);
 
   // Calculate story content bounding box (excluding scroll padding)
   React.useEffect(() => {
-    useKodemoState.setState({
-      storyContentMeasurements: getBoundingClientRelativeToParent(
-        storyInnerRef.current,
-        scrollContainer?.parentNode || scrollContainer
-      ),
-    });
+    const parent = scrollContainer?.parentElement || scrollContainer;
+    if (storyInnerRef.current && parent) {
+      useKodemoState.setState({
+        storyContentMeasurements: getBoundingClientRelativeToParent(storyInnerRef.current, parent),
+      });
+    }
   }, [playerDimensions, theme.storyPaddingH, theme.storyPaddingV, story]);
 
   return (
@@ -282,24 +280,28 @@ export function Root({ children, ...props }) {
   );
 }
 
-export function Content(props) {
+export function Content() {
   const { documentCycle, registerTimelineSegments, unregisterTimelineSegments, setPreviewEffect, clearPreviewEffect } =
     useKodemoState.getState();
   const story = useKodemoState(DocumentSelectors.story);
-  const ref = React.useRef(null);
+  const ref = React.useRef<HTMLElement>(null);
   const { scrollToAnchor } = useStoryScroller();
 
-  function handleMouseOver(event) {
-    const effectElement = event.target.closest('[data-effect-id]:not([data-effect-type="invisible"])');
-    if (effectElement && event.target.nodeName === 'SPAN') {
-      setPreviewEffect(Effect.fromHTMLElement(event.target), { delay: 50 });
+  function handleMouseOver(event: React.MouseEvent) {
+    if (event.target instanceof HTMLElement) {
+      const effectElement = event.target.closest('[data-effect-id]:not([data-effect-type="invisible"])');
+      if (effectElement && event.target.nodeName === 'SPAN') {
+        setPreviewEffect(Effect.fromHTMLElement(event.target), { delay: 50 });
+      }
     }
   }
 
-  function handleMouseOut(event) {
-    const effectElement = event.target.closest('[data-effect-id]:not([data-effect-type="invisible"])');
-    if (effectElement && event.target.nodeName === 'SPAN') {
-      clearPreviewEffect(Effect.fromHTMLElement(event.target));
+  function handleMouseOut(event: React.MouseEvent) {
+    if (event.target instanceof HTMLElement) {
+      const effectElement = event.target.closest('[data-effect-id]:not([data-effect-type="invisible"])');
+      if (effectElement && event.target.nodeName === 'SPAN') {
+        clearPreviewEffect(Effect.fromHTMLElement(event.target));
+      }
     }
   }
 
@@ -307,44 +309,48 @@ export function Content(props) {
    * Generate a clickable anchor element for each heading.
    */
   const generateAnchors = React.useCallback(() => {
-    ref.current
-      .querySelectorAll(
-        'h1:not(.ko-has-anchor), h2:not(.ko-has-anchor), h3:not(.ko-has-anchor), h4:not(.ko-has-anchor), h5:not(.ko-has-anchor), h6:not(.ko-has-anchor)'
-      )
-      .forEach((element) => {
-        const anchor = document.createElement('a');
-        anchor.className = 'ko-anchor';
-        anchor.href = '#' + element.id;
-        anchor.innerHTML = '#';
-        element.appendChild(anchor);
+    if (ref.current) {
+      ref.current
+        .querySelectorAll(
+          'h1:not(.ko-has-anchor), h2:not(.ko-has-anchor), h3:not(.ko-has-anchor), h4:not(.ko-has-anchor), h5:not(.ko-has-anchor), h6:not(.ko-has-anchor)'
+        )
+        .forEach((element) => {
+          const anchor = document.createElement('a');
+          anchor.className = 'ko-anchor';
+          anchor.href = '#' + element.id;
+          anchor.innerHTML = '#';
+          element.appendChild(anchor);
 
-        // Smooth scroll to the anchor
-        anchor.addEventListener('click', (event) => {
-          event.preventDefault();
-          history.replaceState(null, null, anchor.href);
-          scrollToAnchor(element.id);
+          // Smooth scroll to the anchor
+          anchor.addEventListener('click', (event) => {
+            event.preventDefault();
+            history.replaceState(null, '', anchor.href);
+            scrollToAnchor(element.id);
+          });
+
+          element.classList.add('ko-has-anchor');
         });
-
-        element.classList.add('ko-has-anchor');
-      });
+    }
   }, []);
 
   React.useEffect(() => {
-    const effectElements = ref.current.querySelectorAll('[data-effect-id]');
-    const segments = Array.from(effectElements).map((effectElement) => {
-      return new TimelineSegment({
-        effect: Effect.fromHTMLElement(effectElement),
-        measure: () => ({ top: getOffsetRelativeToParent(effectElement, ref.current).y }),
+    if (ref.current) {
+      const effectElements = ref.current.querySelectorAll('[data-effect-id]');
+      const segments = Array.from(effectElements).map((effectElement) => {
+        return new TimelineSegment({
+          effect: Effect.fromHTMLElement(effectElement as HTMLElement),
+          measure: () => ({ top: getOffsetRelativeToParent(effectElement as HTMLElement, ref.current!).y }),
+        });
       });
-    });
 
-    generateAnchors();
+      generateAnchors();
 
-    registerTimelineSegments(segments);
+      registerTimelineSegments(segments);
 
-    return () => {
-      unregisterTimelineSegments(segments);
-    };
+      return () => {
+        unregisterTimelineSegments(segments);
+      };
+    }
   }, [story, documentCycle]);
 
   return (
@@ -353,7 +359,7 @@ export function Content(props) {
       className="ko-story-content"
       onMouseOver={(e) => handleMouseOver(e)}
       onMouseOut={(e) => handleMouseOut(e)}
-      dangerouslySetInnerHTML={{ __html: story }}
+      dangerouslySetInnerHTML={{ __html: story || '' }}
     ></StyledContent>
   );
 }

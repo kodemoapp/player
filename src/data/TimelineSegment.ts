@@ -2,7 +2,7 @@ import { immerable } from 'immer';
 import { Effect } from './Effect';
 
 export interface TimelineSegmentData {
-  id: string;
+  id?: string;
   effect: Effect;
   measure: Function;
 }

@@ -119,8 +119,9 @@ const highlightField = StateField.define({
         highlights = RangeSet.empty;
       }
       // Append new highlight decorations
-      else if (e.is(addHighlight)) {
+      else if (e.is(addHighlight) && e?.value) {
         highlights = highlights.update({
+          // @ts-ignore
           add: [highlightDecoration.range(e.value.from)],
         });
       }
@@ -139,7 +140,7 @@ const highlightGutterMarker = new HighlightGutterMarker();
 
 const highlightGutter = gutterLineClass.compute([highlightField], (state) => {
   const highlights = state.field(highlightField);
-  let marks = [];
+  let marks: any = [];
 
   highlights.between(0, Number.MAX_VALUE, (pos) => {
     let linePos = state.doc.lineAt(pos).from;
@@ -154,7 +155,19 @@ const highlightGutter = gutterLineClass.compute([highlightField], (state) => {
 /**
  * Generates a list of CodeMirror extensions.
  */
-export const getExtensions = ({ language, editable = false, onContentChange, onFocus, onBlur }) => {
+export const getExtensions = ({
+  language,
+  editable = false,
+  onContentChange,
+  onFocus,
+  onBlur,
+}: {
+  language: string;
+  editable?: boolean;
+  onContentChange?: (value: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+}) => {
   const extensions = [
     lineNumbers(),
     highlightSpecialChars(),
@@ -187,7 +200,7 @@ export const getExtensions = ({ language, editable = false, onContentChange, onF
     extensions.push(EditorView.editable.of(false));
   }
 
-  const languageExtension = languageMap[language];
+  const languageExtension = languageMap[language as keyof typeof languageMap];
   if (languageExtension) {
     extensions.push(languageExtension());
   }
