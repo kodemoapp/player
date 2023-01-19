@@ -3,23 +3,15 @@ import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 import { tags as t } from '@lezer/highlight';
 import { theme as kodemoTheme } from '@kodemo/util';
 
-const chalky = '#e5c07b',
-  coral = '#e06c75',
-  cyan = '#56b6c2',
-  invalid = '#ffffff',
+const invalid = '#ffffff',
   ivory = '#abb2bf',
   stone = '#7d8799',
-  malibu = '#61afef',
-  sage = '#98c379',
-  whiskey = '#d19a66',
-  violet = '#c678dd',
   highlightBackground = '#262b33',
   background = kodemoTheme.colors.bgSubjects,
   tooltipBackground = '#353a42',
   selection = '#3E4451',
   cursor = '#528bff',
-  gutter = '#515a6b',
-  gutterHighlight = '#515a6b';
+  gutter = '#515a6b';
 
 const color = {
   red: '#f92672',
@@ -32,7 +24,7 @@ const color = {
 };
 
 /// Editor theme styles
-const editorStyles = EditorView.theme(
+const styles = EditorView.theme(
   {
     '&': {
       color: ivory,
@@ -185,4 +177,4 @@ const highlightStyles = HighlightStyle.define([
 ]);
 
 /// Extension to enable the theme
-export const theme = [editorStyles, syntaxHighlighting(highlightStyles)];
+export const theme = [styles, syntaxHighlighting(highlightStyles)];

@@ -29,6 +29,9 @@ const StyledContent = styled.div`
   height: 100%;
 `;
 
+/**
+ * This component wraps each individual subject.
+ */
 export function Root({ children, ...props }) {
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
   const currentEffect = useKodemoState((state) => state.currentEffect);

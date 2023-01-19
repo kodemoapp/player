@@ -53,7 +53,7 @@ import { theme as codeMirrorTheme } from './codemirror-theme';
 const jsx = () => javascript({ jsx: true });
 const tsx = () => javascript({ jsx: true, typescript: true });
 
-// A map of all support languages (aligns with languages in file util)
+// A map of all supported languages
 const languageMap = {
   javascript: jsx,
   typescript: tsx,
@@ -151,55 +151,6 @@ const highlightGutter = gutterLineClass.compute([highlightField], (state) => {
   return RangeSet.of(marks);
 });
 
-/*
-For future reference; we should be able to highlight elements
-in the line number gutter via lineNumberMarkers.
-
-This may be helpful: https://github.com/codemirror/view/blob/main/src/active-line.ts
-
-lineNumberMarkers
-
-const emptyMarker = new (class extends GutterMarker {
-  toDOM() {
-    return document.createTextNode('ø');
-  }
-})();
-
-const emptyLineGutter = gutter({
-  lineMarker(view, line) {
-    return line.from == line.to ? emptyMarker : null;
-  },
-  initialSpacer: () => emptyMarker,
-});
-*/
-
-/*
-export const gutterLineClass = Facet.define();
-
-const activeLineGutterMarker = new (class extends GutterMarker {
-  elementClass = 'cm-activeLineGutter';
-})();
-
-const highlightedLineGutterMarker = gutterLineClass.compute(['highlights'], (state) => {
-  let marks = [],
-    last = -1;
-  console.log(state);
-  for (let range of state.selection.ranges)
-    if (range.empty) {
-      let linePos = state.doc.lineAt(range.head).from;
-      if (linePos > last) {
-        last = linePos;
-        marks.push(activeLineGutterMarker.range(linePos));
-      }
-    }
-  return RangeSet.of(marks);
-});
-
-export function highlightGutter() {
-  return highlightedLineGutterMarker;
-}
-*/
-
 /**
  * Generates a list of CodeMirror extensions.
  */
@@ -263,3 +214,52 @@ export const getExtensions = ({ language, editable = false, onContentChange, onF
 
   return extensions;
 };
+
+/*
+For future reference; we should be able to highlight elements
+in the line number gutter via lineNumberMarkers.
+
+This may be helpful: https://github.com/codemirror/view/blob/main/src/active-line.ts
+
+lineNumberMarkers
+
+const emptyMarker = new (class extends GutterMarker {
+  toDOM() {
+    return document.createTextNode('ø');
+  }
+})();
+
+const emptyLineGutter = gutter({
+  lineMarker(view, line) {
+    return line.from == line.to ? emptyMarker : null;
+  },
+  initialSpacer: () => emptyMarker,
+});
+*/
+
+/*
+export const gutterLineClass = Facet.define();
+
+const activeLineGutterMarker = new (class extends GutterMarker {
+  elementClass = 'cm-activeLineGutter';
+})();
+
+const highlightedLineGutterMarker = gutterLineClass.compute(['highlights'], (state) => {
+  let marks = [],
+    last = -1;
+  console.log(state);
+  for (let range of state.selection.ranges)
+    if (range.empty) {
+      let linePos = state.doc.lineAt(range.head).from;
+      if (linePos > last) {
+        last = linePos;
+        marks.push(activeLineGutterMarker.range(linePos));
+      }
+    }
+  return RangeSet.of(marks);
+});
+
+export function highlightGutter() {
+  return highlightedLineGutterMarker;
+}
+*/

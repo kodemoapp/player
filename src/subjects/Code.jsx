@@ -87,6 +87,7 @@ const StyledCopyToClipboard = styled.button`
 const CodeSubject = (props) => {
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
   const currentEffect = useKodemoState((state) => state.currentEffect);
+
   const previousEffectRef = React.useRef();
   const versionsRef = React.useRef({});
 
@@ -101,6 +102,7 @@ const CodeSubject = (props) => {
     }
   }, [subject.name, subject.language]);
 
+  // Trigger a code transition when the current effect changes
   React.useEffect(() => {
     // We're targeting this subject
     if (currentEffect && currentEffect.subject === props.subjectId) {
@@ -158,17 +160,17 @@ const CodeSubject = (props) => {
 
 const CodeVersion = React.forwardRef(({ subjectId, versionId, value, language, ...props }, forwardRef) => {
   const { showNotification } = useNotifications();
-  const copyCode = useKodemoConfig((state) => state.copyCode);
+  const copyCodeEnabled = useKodemoConfig((state) => state.copyCode);
   const [copied, setCopied] = React.useState(false);
 
-  const editor = React.useRef(null);
-  const preElement = React.useRef(null);
   const currentEffect = useKodemoState(KodemoStateSelectors.currentEffect);
   const editable = useKodemoState((state) => state.editing);
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, subjectId));
+
   const codeHighlights = currentEffect?.subject === subjectId ? currentEffect?.getCodeHighlights() : null;
 
-  React.useImperativeHandle(forwardRef, () => preElement.current);
+  const editor = React.useRef(null);
+  const preElement = React.useRef(null);
 
   let isActive = false;
 
@@ -191,6 +193,7 @@ const CodeVersion = React.forwardRef(({ subjectId, versionId, value, language, .
     }
   }
 
+  // Called when the code editor content changes
   const handleContentChange = (value) => {
     useKodemoState.getState().updateSubjectVersion(subjectId, versionId, { value });
   };
@@ -212,7 +215,7 @@ const CodeVersion = React.forwardRef(({ subjectId, versionId, value, language, .
 
   return (
     <pre className={'ko-subject-version' + (isActive ? ' active' : '')} ref={preElement} {...props}>
-      {copyCode && (
+      {copyCodeEnabled && (
         <Tooltip.Tip text="Copy code to clipboard">
           <StyledCopyToClipboard onClick={handleCopyToClipboard}>
             {copied === true ? <CheckIcon /> : <ClipboardCopyIcon />}
