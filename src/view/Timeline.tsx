@@ -1,12 +1,7 @@
-import React from 'react';
-import useKodemoState, {
-  KodemoStateSelectors,
-  KodemoStateEqualityFunctions,
-  DocumentSelectors,
-} from '../hooks/useKodemoState';
-import styled, { css } from 'styled-components';
-import { useTheme } from 'styled-components';
 import throttle from 'lodash/throttle';
+import React from 'react';
+import styled, { css, useTheme } from 'styled-components';
+import useKodemoState, { KodemoStateEqualityFunctions, KodemoStateSelectors } from '../hooks/useKodemoState';
 
 const StyledRoot = styled.aside`
   display: block;

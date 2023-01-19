@@ -14,11 +14,13 @@ export default defineConfig({
     host: true,
   },
 
-  // resolve: {
-  //   alias: {
-  //     "@kodemo/util": path.resolve(__dirname, "../util/src"),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      // react: path.resolve(__dirname, 'node_modules', 'react'),
+      // 'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
+      // "@kodemo/util": path.resolve(__dirname, "../util/src"),
+    },
+  },
 
   build: {
     lib: {
@@ -39,6 +41,7 @@ export default defineConfig({
     },
   },
 
+  // @ts-ignore
   test: {
     environment: 'happy-dom',
     globals: true,

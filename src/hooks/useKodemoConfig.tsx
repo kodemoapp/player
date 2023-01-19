@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
-import { CODE_SUBJECT_TYPE, IFRAME_SUBJECT_TYPE, IMAGE_SUBJECT_TYPE, MATH_SUBJECT_TYPE } from '../enum/SubjectTypes';
+import SubjectType from '../enum/SubjectType';
 import { CodeSubject, IframeSubject, ImageSubject, MathSubject } from '../subjects';
 import { getExtensionFromFilename } from '../util/file';
 
@@ -70,45 +70,45 @@ const defaultConfig: IKodemoConfig = {
   compareImages: true,
 
   subjectFormats: [
-    { type: CODE_SUBJECT_TYPE, extensions: ['cpp', 'cxx'], language: 'cpp', label: 'C++' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['css'], language: 'css', label: 'CSS' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['go'], language: 'go', label: 'Go' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['html'], language: 'html', label: 'HTML' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['java', 'class'], language: 'java', label: 'Java' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['js', 'jsx'], language: 'javascript', label: 'JavaScript' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['json'], language: 'json', label: 'JSON' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['kr'], language: 'kotlin', label: 'Kotlin' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['md'], language: 'markdown', label: 'Markdown' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['php'], language: 'php', label: 'PHP' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['python'], language: 'python', label: 'Python' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['rb', 'ruby', 'rake'], language: 'ruby', label: 'Ruby' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['sh', 'bash'], language: 'shell', label: 'Shell' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['swift'], language: 'swift', label: 'Swift' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['rust'], language: 'rust', label: 'Rust' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['ts', 'tsx'], language: 'typescript', label: 'TypeScript' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['txt'], language: '', label: 'Text' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['xml'], language: 'xml', label: 'XML' },
-    { type: CODE_SUBJECT_TYPE, extensions: ['yaml', 'yml', 'syntax'], language: 'yaml', label: 'YAML' },
+    { type: SubjectType.CODE, extensions: ['cpp', 'cxx'], language: 'cpp', label: 'C++' },
+    { type: SubjectType.CODE, extensions: ['css'], language: 'css', label: 'CSS' },
+    { type: SubjectType.CODE, extensions: ['go'], language: 'go', label: 'Go' },
+    { type: SubjectType.CODE, extensions: ['html'], language: 'html', label: 'HTML' },
+    { type: SubjectType.CODE, extensions: ['java', 'class'], language: 'java', label: 'Java' },
+    { type: SubjectType.CODE, extensions: ['js', 'jsx'], language: 'javascript', label: 'JavaScript' },
+    { type: SubjectType.CODE, extensions: ['json'], language: 'json', label: 'JSON' },
+    { type: SubjectType.CODE, extensions: ['kr'], language: 'kotlin', label: 'Kotlin' },
+    { type: SubjectType.CODE, extensions: ['md'], language: 'markdown', label: 'Markdown' },
+    { type: SubjectType.CODE, extensions: ['php'], language: 'php', label: 'PHP' },
+    { type: SubjectType.CODE, extensions: ['python'], language: 'python', label: 'Python' },
+    { type: SubjectType.CODE, extensions: ['rb', 'ruby', 'rake'], language: 'ruby', label: 'Ruby' },
+    { type: SubjectType.CODE, extensions: ['sh', 'bash'], language: 'shell', label: 'Shell' },
+    { type: SubjectType.CODE, extensions: ['swift'], language: 'swift', label: 'Swift' },
+    { type: SubjectType.CODE, extensions: ['rust'], language: 'rust', label: 'Rust' },
+    { type: SubjectType.CODE, extensions: ['ts', 'tsx'], language: 'typescript', label: 'TypeScript' },
+    { type: SubjectType.CODE, extensions: ['txt'], language: '', label: 'Text' },
+    { type: SubjectType.CODE, extensions: ['xml'], language: 'xml', label: 'XML' },
+    { type: SubjectType.CODE, extensions: ['yaml', 'yml', 'syntax'], language: 'yaml', label: 'YAML' },
 
-    { type: MATH_SUBJECT_TYPE, extensions: ['tex', 'latex'] },
+    { type: SubjectType.MATH, extensions: ['tex', 'latex'] },
 
-    { type: IMAGE_SUBJECT_TYPE, extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp'] },
+    { type: SubjectType.IMAGE, extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp'] },
   ],
 
   subjectComponents: {
-    [CODE_SUBJECT_TYPE]: {
+    [SubjectType.CODE]: {
       component: CodeSubject,
       versioned: true,
     },
-    [MATH_SUBJECT_TYPE]: {
+    [SubjectType.MATH]: {
       component: MathSubject,
       versioned: false,
     },
-    [IMAGE_SUBJECT_TYPE]: {
+    [SubjectType.IMAGE]: {
       component: ImageSubject,
       versioned: true,
     },
-    [IFRAME_SUBJECT_TYPE]: {
+    [SubjectType.IFRAME]: {
       component: IframeSubject,
       versioned: false,
     },
@@ -142,7 +142,7 @@ const useKodemoConfig = create(
 // Any time the subjects change we need to update all
 // derivative data structures
 const afterSubjectsSet = (subjectFormats: ISubjectFormatDefinition[]) => {
-  const codeSubjectFormats = subjectFormats.filter((fileFormat) => fileFormat.type === CODE_SUBJECT_TYPE);
+  const codeSubjectFormats = subjectFormats.filter((fileFormat) => fileFormat.type === SubjectType.CODE);
 
   const subjectFileExtensions = subjectFormats.reduce((list: string[], format) => {
     if (format.extensions) {

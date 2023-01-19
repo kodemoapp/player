@@ -9,40 +9,6 @@ import { keyframes } from 'styled-components';
 import { countLeadingWhitespace, formatLineForDiff } from '../util/code';
 import throttle from 'lodash/throttle';
 
-let whitespaceWidth = 0;
-
-/**
- * Calculates the width of a single whitespace character.
- * We need this in order to animate between paird lines
- * that have different leading space
- *
- * @param {EditorView} editorView
- * @returns
- */
-const calculateWhitespaceWidth = (editorView) => {
-  // Only calculate the width once
-  // Prefer codemirror's built-in whitespace width
-  if (typeof editorView.defaultCharacterWidth === 'number') {
-    whitespaceWidth = editorView.defaultCharacterWidth;
-  }
-  // Find the first line that has leading space AND contains
-  // a DOM element we can measure (some have only text nodes)
-  else if (!whitespaceWidth) {
-    const dom = editorView.contentDOM;
-    Array.from(dom.querySelectorAll('.cm-line')).some((element) => {
-      const firstChild = element.firstElementChild;
-      const leadingSpace = countLeadingWhitespace(element.textContent);
-      if (firstChild && leadingSpace > 1) {
-        const offsetLeft = firstChild.offsetLeft;
-        if (offsetLeft > 0) {
-          whitespaceWidth = offsetLeft / leadingSpace;
-          return true;
-        }
-      }
-    });
-  }
-};
-
 const SCROLL_EASING = 'easeInOutQuint';
 const SCROLL_DURATION = 1000;
 
@@ -742,3 +708,37 @@ export const CodeEditor = React.forwardRef(({ value, language, editable, active,
 
   return <code style={{ visibility: 'hidden' }} ref={codeElementRef}></code>;
 });
+
+let whitespaceWidth = 0;
+
+/**
+ * Calculates the width of a single whitespace character.
+ * We need this in order to animate between paird lines
+ * that have different leading space
+ *
+ * @param {EditorView} editorView
+ * @returns
+ */
+const calculateWhitespaceWidth = (editorView) => {
+  // Only calculate the width once
+  // Prefer codemirror's built-in whitespace width
+  if (typeof editorView.defaultCharacterWidth === 'number') {
+    whitespaceWidth = editorView.defaultCharacterWidth;
+  }
+  // Find the first line that has leading space AND contains
+  // a DOM element we can measure (some have only text nodes)
+  else if (!whitespaceWidth) {
+    const dom = editorView.contentDOM;
+    Array.from(dom.querySelectorAll('.cm-line')).some((element) => {
+      const firstChild = element.firstElementChild;
+      const leadingSpace = countLeadingWhitespace(element.textContent);
+      if (firstChild && leadingSpace > 1) {
+        const offsetLeft = firstChild.offsetLeft;
+        if (offsetLeft > 0) {
+          whitespaceWidth = offsetLeft / leadingSpace;
+          return true;
+        }
+      }
+    });
+  }
+};

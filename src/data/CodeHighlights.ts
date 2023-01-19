@@ -1,3 +1,14 @@
+/**
+ * Utility for manipulating a list of line numbers to highlight in
+ * a code block.
+ *
+ * const hl = CodeHighlights.fromString('6-10, 1, 2, 3, 2, 7, 18');
+ * console.log(hl.toArray());
+ * console.log(hl.toString());
+
+ * hl.toggleLines(3, 2);
+ * console.log(hl.toString());
+ */
 export class CodeHighlights {
   highlights: Array<boolean | undefined> = [];
 
@@ -85,10 +96,3 @@ export class CodeHighlights {
     return highlights;
   }
 }
-
-// const hl = CodeHighlights.fromString('6-10, 1, 2, 3, 2, 7, 18');
-// console.log(hl.toArray());
-// console.log(hl.toString());
-
-// hl.toggleLines(3, 2);
-// console.log(hl.toString());

@@ -1,13 +1,13 @@
+import { getBoundingClientRelativeToParent, getOffsetRelativeToParent, theme } from '@kodemo/util';
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
 import { Effect } from '../data/Effect';
 import { TimelineSegment } from '../data/TimelineSegment';
 import useKodemoState, {
   DocumentSelectors,
-  KodemoStateSelectors,
   KodemoStateEqualityFunctions,
+  KodemoStateSelectors,
 } from '../hooks/useKodemoState';
-import { theme, getOffsetRelativeToParent, getBoundingClientRelativeToParent } from '@kodemo/util';
 import useStoryScroller from '../hooks/useStoryScroller';
 
 const StyledRoot = styled.div`
@@ -223,8 +223,9 @@ export const StyledContent = styled(StyledContentBase)({
 export function Root({ children, ...props }) {
   const storyRef = React.useRef(null);
   const storyInnerRef = React.useRef(null);
-  const scrollContainer = useKodemoState(KodemoStateSelectors.scrollContainer);
+
   const playheadMeasurements = useKodemoState(KodemoStateSelectors.playheadMeasurements);
+  const scrollContainer = useKodemoState(KodemoStateSelectors.scrollContainer);
   const playerDimensions = useKodemoState(KodemoStateSelectors.dimensions);
   const playerOffset = useKodemoState(KodemoStateSelectors.offset);
   const story = useKodemoState(DocumentSelectors.story);
@@ -235,7 +236,7 @@ export function Root({ children, ...props }) {
 
   const theme = useTheme();
 
-  // Calculate how much we need to be able to "overscroll"
+  // Calculate how much we need to be able to overscroll
   // in order to reach the last timeline segment
   React.useEffect(() => {
     const lastSegment = segmentsOrder[segmentsOrder.length - 1];
@@ -254,6 +255,7 @@ export function Root({ children, ...props }) {
     }
   }, [segmentsOrder, playheadMeasurements?.top, playerDimensions, playerOffset?.y]);
 
+  // Calculate story bounding box (including scroll padding)
   React.useEffect(() => {
     useKodemoState.setState({
       storyMeasurements: getBoundingClientRelativeToParent(
@@ -263,6 +265,7 @@ export function Root({ children, ...props }) {
     });
   }, [playerDimensions, theme.storyPaddingH, theme.storyPaddingV]);
 
+  // Calculate story content bounding box (excluding scroll padding)
   React.useEffect(() => {
     useKodemoState.setState({
       storyContentMeasurements: getBoundingClientRelativeToParent(
@@ -306,7 +309,7 @@ export function Content(props) {
   const generateAnchors = React.useCallback(() => {
     ref.current
       .querySelectorAll(
-        'h1:not(.ko-has-anchor),h2:not(.ko-has-anchor), h3:not(.ko-has-anchor), h4:not(.ko-has-anchor), h5:not(.ko-has-anchor), h6:not(.ko-has-anchor)'
+        'h1:not(.ko-has-anchor), h2:not(.ko-has-anchor), h3:not(.ko-has-anchor), h4:not(.ko-has-anchor), h5:not(.ko-has-anchor), h6:not(.ko-has-anchor)'
       )
       .forEach((element) => {
         const anchor = document.createElement('a');
@@ -331,11 +334,7 @@ export function Content(props) {
     const segments = Array.from(effectElements).map((effectElement) => {
       return new TimelineSegment({
         effect: Effect.fromHTMLElement(effectElement),
-        measure: () => {
-          return {
-            top: getOffsetRelativeToParent(effectElement, ref.current).y,
-          };
-        },
+        measure: () => ({ top: getOffsetRelativeToParent(effectElement, ref.current).y }),
       });
     });
 

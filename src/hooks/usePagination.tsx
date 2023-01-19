@@ -4,6 +4,9 @@ import useKodemoConfig from './useKodemoConfig';
 import useKodemoState, { KodemoStateEqualityFunctions, KodemoStateSelectors } from './useKodemoState';
 import useStoryScroller from './useStoryScroller';
 
+/**
+ * Hook for paginating between timeline segments.
+ */
 export default function usePagination({ bindKeys = false } = {}) {
   const keyboardPagination = useKodemoConfig((state) => state.keyboardPagination);
   const { scrollTo } = useStoryScroller();

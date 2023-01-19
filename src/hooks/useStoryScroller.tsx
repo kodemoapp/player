@@ -2,6 +2,9 @@ import anime from 'animejs';
 import React from 'react';
 import useKodemoState, { KodemoStateSelectors } from './useKodemoState';
 
+/**
+ * Hook for (smoothly) scrolling the story.
+ */
 const useStoryScroller = () => {
   const scrollTo = React.useCallback((newScrollTop: number) => {
     const state = useKodemoState.getState();

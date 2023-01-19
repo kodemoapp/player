@@ -72,12 +72,12 @@ export interface IKodemoState {
   playheadFixedTop: number | null;
 
   /**
-   * Bounding box of the story wrapper element.
+   * Bounding box of the story element (including scroll padding)
    */
   storyMeasurements: any;
 
   /**
-   * Bounding box of the story content element.
+   * Bounding box of the story content (excluding scroll padding)
    */
   storyContentMeasurements: any;
 

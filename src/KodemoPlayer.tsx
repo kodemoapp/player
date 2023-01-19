@@ -6,6 +6,7 @@ import styled, { css, ThemeProvider } from 'styled-components';
 
 import PlayerFooter from './components/PlayerFooter';
 import Pagination from './components/Pagination';
+import SubjectType from './enum/SubjectType';
 import KodemoLayout from './enum/KodemoLayout';
 import useKodemoConfig, { extendKodemoConfig, IKodemoConfigPartial } from './hooks/useKodemoConfig';
 import useKodemoState, { DocumentSelectors, KodemoDocument, KodemoStateSelectors } from './hooks/useKodemoState';
@@ -20,7 +21,6 @@ import useStoryScroller from './hooks/useStoryScroller';
 export * from './data/CodeHighlights';
 export * from './data/Effect';
 export * from './data/TimelineSegment';
-export * from './enum/SubjectTypes';
 export * from './hooks/useKodemoConfig';
 export * from './hooks/useKodemoState';
 export * from './subjects';
@@ -36,6 +36,7 @@ export {
   useStoryScroller,
   Pagination,
   PlayerFooter,
+  SubjectType,
   KodemoLayout,
   Subject,
   Root,
@@ -55,11 +56,9 @@ export const createTheme = (overrideTheme: any) => {
   });
 };
 
-interface IStyledRoot {
+const StyledRoot = styled.div<{
   layout: KodemoLayout;
-}
-
-const StyledRoot = styled.div<IStyledRoot>`
+}>`
   --ko-story-padding-h: ${(props) => props.theme.storyPaddingH}px;
   --ko-story-padding-v: ${(props) => props.theme.storyPaddingV}px;
   --timeline-padded-width: 2.5em;
@@ -381,9 +380,8 @@ export const KodemoPlayer = React.forwardRef<IKodemoPlayer, KodemoPlayerProps>(
     const currentJSON = React.useRef<any>(null);
     const { scrollTo } = useStoryScroller();
 
-    // Set the document if it has changed.
-    // - This is done synchronously to allow for SSR.
-    // - SSR is currently disabled due to class mismatches when running in web app.
+    // Set the document if it has changed. This is done synchronously
+    // to allow for SSR.
     if (currentJSON.current !== json && typeof json === 'object') {
       currentJSON.current = json;
       setDocument(json);

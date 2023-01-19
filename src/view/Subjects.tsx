@@ -1,15 +1,12 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { Effect } from "../data/Effect";
-import { Subject } from "../subjects/index";
-import useKodemoState, {
-  DocumentSelectors,
-  KodemoStateSelectors,
-} from "../hooks/useKodemoState";
-import useKodemoConfig from "../hooks/useKodemoConfig";
-import anime from "animejs";
-import { shallow } from "zustand/shallow";
-import { getOrderedCollectionAsEntries } from "../util/util";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import { Effect } from '../data/Effect';
+import { Subject } from '../subjects/index';
+import useKodemoState, { DocumentSelectors, KodemoStateSelectors } from '../hooks/useKodemoState';
+import useKodemoConfig from '../hooks/useKodemoConfig';
+import anime from 'animejs';
+import { shallow } from 'zustand/shallow';
+import { getOrderedCollectionAsEntries } from '../util/util';
 
 const StyledRoot = styled.div`
   display: flex;
@@ -89,19 +86,11 @@ const StyledTab = styled.button<{ active: boolean }>`
 
 export function Root(props: any) {
   const dimensions = useKodemoState(KodemoStateSelectors.dimensions);
-  return (
-    <StyledRoot
-      className="ko-subjects"
-      style={{ height: dimensions.height }}
-      {...props}
-    ></StyledRoot>
-  );
+  return <StyledRoot className="ko-subjects" style={{ height: dimensions.height }} {...props}></StyledRoot>;
 }
 
 export function Content({ children, ...props }: { children?: any }) {
-  const getSubjectComponentByType = useKodemoConfig(
-    (state) => state.getSubjectComponentByType
-  );
+  const getSubjectComponentByType = useKodemoConfig((state) => state.getSubjectComponentByType);
   const subjects = useKodemoState(DocumentSelectors.subjects, shallow);
   const subjectIndex = useKodemoState(DocumentSelectors.subjectIndex, shallow);
   const orderedSubjects = getOrderedCollectionAsEntries(subjects, subjectIndex);
@@ -111,9 +100,7 @@ export function Content({ children, ...props }: { children?: any }) {
       {children
         ? children
         : orderedSubjects.map(([id, subject]) => {
-            const SubjectComponent = getSubjectComponentByType(
-              subject.type
-            ).component;
+            const SubjectComponent = getSubjectComponentByType(subject.type).component;
             if (SubjectComponent) {
               return (
                 <Subject.Root subjectId={id} key={id}>
@@ -122,7 +109,7 @@ export function Content({ children, ...props }: { children?: any }) {
               );
             } else {
               console.warn(`Unknown subject type "${subject.type}"`);
-              return "";
+              return '';
             }
           })}
     </StyledContent>
@@ -130,111 +117,89 @@ export function Content({ children, ...props }: { children?: any }) {
 }
 
 export function Header({ children, ...props }: { children?: any }) {
-  return (
-    <StyledHeader {...props}>
-      {children ? children : <Tabs></Tabs>}
-    </StyledHeader>
-  );
+  return <StyledHeader {...props}>{children ? children : <Tabs></Tabs>}</StyledHeader>;
 }
 
-const Tabs = React.forwardRef<HTMLDivElement, any>(
-  ({ children, ...props }, forwardRef) => {
-    const subjects = useKodemoState(DocumentSelectors.subjects, shallow);
-    const subjectIndex = useKodemoState(
-      DocumentSelectors.subjectIndex,
-      shallow
-    );
-    const orderedSubjects = getOrderedCollectionAsEntries(
-      subjects,
-      subjectIndex
-    );
+const Tabs = React.forwardRef<HTMLDivElement, any>(({ children, ...props }, forwardRef) => {
+  const subjects = useKodemoState(DocumentSelectors.subjects, shallow);
+  const subjectIndex = useKodemoState(DocumentSelectors.subjectIndex, shallow);
+  const orderedSubjects = getOrderedCollectionAsEntries(subjects, subjectIndex);
 
-    return (
-      <StyledTabs ref={forwardRef} {...props}>
-        {children
-          ? children
-          : orderedSubjects.map(([id]) => {
-              // @ts-ignore
-              return <Tab subjectId={id} key={id} />;
-            })}
-      </StyledTabs>
-    );
-  }
-);
+  return (
+    <StyledTabs ref={forwardRef} {...props}>
+      {children
+        ? children
+        : orderedSubjects.map(([id]) => {
+            // @ts-ignore
+            return <Tab subjectId={id} key={id} />;
+          })}
+    </StyledTabs>
+  );
+});
 
-export interface ITabProps {
+export interface TabProps {
   subjectId: string;
   active: boolean;
   children: any;
   [key: string]: any;
 }
 
-const Tab = React.forwardRef<any, ITabProps>(
-  ({ active, subjectId, ...props }, forwardRef) => {
-    const tabRef = React.useRef<any>(null);
-    const currentEffect = useKodemoState((state) => state.currentEffect);
-    const setPreviewEffect = useKodemoState((state) => state.setPreviewEffect);
-    const subject = useKodemoState((state) =>
-      DocumentSelectors.subject(state, subjectId)
-    );
+const Tab = React.forwardRef<any, TabProps>(({ active, subjectId, ...props }, forwardRef) => {
+  const tabRef = React.useRef<any>(null);
+  const currentEffect = useKodemoState((state) => state.currentEffect);
+  const setPreviewEffect = useKodemoState((state) => state.setPreviewEffect);
+  const subject = useKodemoState((state) => DocumentSelectors.subject(state, subjectId));
 
-    if (!active && currentEffect && currentEffect.subject === subjectId) {
-      active = true;
-    }
-
-    const handleClick = React.useCallback(() => {
-      setPreviewEffect(Effect.fromJSON({ subject: subjectId }));
-    }, []);
-
-    const scrollTabIntoViewIfNeeded = React.useCallback(() => {
-      // This is called async so ensure the tab still exists
-      if (tabRef.current && tabRef.current.parentNode) {
-        const tabLeft = tabRef.current.offsetLeft;
-        const tabRight = tabLeft + tabRef.current.offsetWidth;
-        const scrollLeft = tabRef.current.parentNode.scrollLeft;
-        const scrollWidth = tabRef.current.parentNode.offsetWidth;
-
-        let newScrollLeft;
-
-        if (tabRight > scrollLeft + scrollWidth) {
-          newScrollLeft = tabRight - scrollWidth;
-        } else if (tabLeft < scrollLeft) {
-          newScrollLeft = tabLeft;
-        }
-
-        anime.remove(tabRef.current.parentNode);
-
-        if (typeof newScrollLeft === "number") {
-          anime({
-            targets: tabRef.current.parentNode,
-            easing: "easeInOutQuint",
-            duration: 750,
-            scrollLeft: newScrollLeft,
-          });
-        }
-      }
-    }, []);
-
-    React.useEffect(() => {
-      if (active) {
-        setTimeout(scrollTabIntoViewIfNeeded, 1);
-      }
-    }, [active]);
-
-    React.useImperativeHandle(forwardRef, () => tabRef.current);
-
-    return (
-      <StyledTab
-        active={active}
-        onClick={handleClick}
-        data-id={subjectId}
-        ref={tabRef}
-        {...props}
-      >
-        {props.children || subject.name}
-      </StyledTab>
-    );
+  if (!active && currentEffect && currentEffect.subject === subjectId) {
+    active = true;
   }
-);
+
+  const handleClick = React.useCallback(() => {
+    setPreviewEffect(Effect.fromJSON({ subject: subjectId }));
+  }, []);
+
+  const scrollTabIntoViewIfNeeded = React.useCallback(() => {
+    // This is called async so ensure the tab still exists
+    if (tabRef.current && tabRef.current.parentNode) {
+      const tabLeft = tabRef.current.offsetLeft;
+      const tabRight = tabLeft + tabRef.current.offsetWidth;
+      const scrollLeft = tabRef.current.parentNode.scrollLeft;
+      const scrollWidth = tabRef.current.parentNode.offsetWidth;
+
+      let newScrollLeft;
+
+      if (tabRight > scrollLeft + scrollWidth) {
+        newScrollLeft = tabRight - scrollWidth;
+      } else if (tabLeft < scrollLeft) {
+        newScrollLeft = tabLeft;
+      }
+
+      anime.remove(tabRef.current.parentNode);
+
+      if (typeof newScrollLeft === 'number') {
+        anime({
+          targets: tabRef.current.parentNode,
+          easing: 'easeInOutQuint',
+          duration: 750,
+          scrollLeft: newScrollLeft,
+        });
+      }
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (active) {
+      setTimeout(scrollTabIntoViewIfNeeded, 1);
+    }
+  }, [active]);
+
+  React.useImperativeHandle(forwardRef, () => tabRef.current);
+
+  return (
+    <StyledTab active={active} onClick={handleClick} data-id={subjectId} ref={tabRef} {...props}>
+      {props.children || subject.name}
+    </StyledTab>
+  );
+});
 
 export { Tabs, Tab };
