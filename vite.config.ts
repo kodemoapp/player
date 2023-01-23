@@ -15,9 +15,8 @@ export default defineConfig({
   },
 
   resolve: {
+    dedupe: ['react', 'react-dom', 'styled-components'],
     alias: {
-      // react: path.resolve(__dirname, 'node_modules', 'react'),
-      // 'react-dom': path.resolve(__dirname, 'node_modules', 'react-dom'),
       // "@kodemo/util": path.resolve(__dirname, "../util/src"),
     },
   },
@@ -45,7 +44,7 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
-    setupFiles: ['./vitest.setup.js'],
+    setupFiles: ['./vitest.setup.ts'],
     deps: {
       inline: ['vitest-canvas-mock'],
     },

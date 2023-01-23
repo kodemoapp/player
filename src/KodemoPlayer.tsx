@@ -190,6 +190,7 @@ type KodemoPlayerProps = {
   layout?: KodemoLayout;
 
   children?: React.ReactNode;
+  style?: any;
 } & IKodemoConfigPartial;
 
 type KodemoPlayerRootProps = {
