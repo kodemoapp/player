@@ -42,6 +42,52 @@ export {
   Root,
 };
 
+type KodemoPlayerProps = {
+  /**
+   * The document that we want to render. This document will automatically
+   * render as soon as the player is mounted.
+   */
+  json?: KodemoDocument;
+
+  theme?: Theme;
+
+  /**
+   * An optional menu element to render as part of the player.
+   */
+  menu?: ReactNode;
+
+  /**
+   * Used to adjust the behavior of the player in different environments.
+   * Setting this to e2e will apply styling to combat a few Cypress
+   * scroll quirks.
+   */
+  environment?: 'e2e';
+
+  /**
+   * The width of the player in pixels. Requires layout to be 'responsive'.
+   */
+  width?: number;
+
+  /**
+   * The height of the player in pixels. Requires layout to be 'responsive'.
+   */
+  height?: number;
+
+  /**
+   * The scroll top position to start from when the player is first mounted.
+   */
+  scrollTop?: number;
+
+  /**
+   * Change the player layout. By default, the player will cover the full
+   * viewport but you can use this setting to make the player responsive.
+   */
+  layout?: KodemoLayout;
+
+  children?: React.ReactNode;
+  style?: any;
+} & IKodemoConfigPartial;
+
 declare module 'styled-components' {
   export interface DefaultTheme {
     timelinePlayheadSize: number;
@@ -147,57 +193,6 @@ export const StoryWrapper = styled.div`
   }
 `;
 
-type KodemoPlayerProps = {
-  /**
-   * The document that we want to render. This document will automatically
-   * render as soon as the player is mounted.
-   */
-  json?: KodemoDocument;
-
-  theme?: Theme;
-
-  /**
-   * An optional menu element to render as part of the player.
-   */
-  menu?: ReactNode;
-
-  /**
-   * Used to adjust the behavior of the player in different environments.
-   * Setting this to e2e will apply styling to combat a few Cypress
-   * scroll quirks.
-   */
-  environment?: 'e2e';
-
-  /**
-   * The width of the player in pixels. Requires layout to be 'responsive'.
-   */
-  width?: number;
-
-  /**
-   * The height of the player in pixels. Requires layout to be 'responsive'.
-   */
-  height?: number;
-
-  /**
-   * The scroll top position to start from when the player is first mounted.
-   */
-  scrollTop?: number;
-
-  /**
-   * Change the player layout. By default, the player will cover the full
-   * viewport but you can use this setting to make the player responsive.
-   */
-  layout?: KodemoLayout;
-
-  children?: React.ReactNode;
-  style?: any;
-} & IKodemoConfigPartial;
-
-type KodemoPlayerRootProps = {
-  children: any;
-  style?: any;
-} & KodemoPlayerProps;
-
 function Root({
   children,
   environment,
@@ -206,7 +201,7 @@ function Root({
   layout = KodemoLayout.FULL,
   style,
   ...props
-}: KodemoPlayerRootProps) {
+}: KodemoPlayerProps) {
   const dimensions = useKodemoState(KodemoStateSelectors.dimensions);
   const offset = useKodemoState(KodemoStateSelectors.offset);
   const layoutComplete = useKodemoState((state) => state.layoutComplete);

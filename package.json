@@ -1,6 +1,6 @@
 {
   "name": "@kodemo/player",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "React component for viewing Kodemo documents.",
   "homepage": "https://kodemo.com",
   "author": {
@@ -42,7 +42,7 @@
     "@codemirror/lang-rust": "^6.0.1",
     "@codemirror/lang-xml": "^6.0.1",
     "@codemirror/legacy-modes": "^6.2.0",
-    "@kodemo/util": "0.3.1",
+    "@kodemo/util": "0.3.2",
     "@lezer/highlight": "^1.1.2",
     "@types/diff": "^5.0.2",
     "animejs": "^3.2.1",

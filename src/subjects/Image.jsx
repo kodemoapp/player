@@ -155,21 +155,27 @@ const StyledVersion = styled.div`
 const ImageSubject = React.forwardRef((props, forwardRef) => {
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
   const currentEffect = useKodemoState(KodemoStateSelectors.currentEffect);
+
   const [previousVersionId, setPreviousVersionId] = React.useState(null);
   const [activeVersionId, setActiveVersionId] = React.useState(null);
+
+  // The amount of the previous version that is currently visible,
+  // as a percentage of the width of the subject
   const [revealPercent, setRevealPercent] = React.useState(null);
+
   const [cursor, setCursor] = React.useState(null);
   const [dragging, setDragging] = React.useState(false);
+
   const contentRef = React.useRef(null);
   const versionsRef = React.useRef({});
-  const compareImages = useKodemoConfig((state) => state.compareImages);
+  const compareImagesEnabled = useKodemoConfig((state) => state.compareImages);
 
   // We allow image comparisons if
   // - we're not editing
   // - it's enabled in the Kodemo config
-  // - the subject has not opted out of comparisons
+  // - th's enabled (not opted out of) in the document json
   // - there is a previous version to compare to
-  const canCompareVersions = !props.editing && compareImages && subject.compare !== false && previousVersionId;
+  const canCompareVersions = !props.editing && compareImagesEnabled && subject.compare !== false && previousVersionId;
 
   const isComparingVersions = canCompareVersions && revealPercent !== null;
   const hasRevealedAnyPercent = isComparingVersions && revealPercent > 0;
@@ -394,6 +400,7 @@ const ImageVersion = React.forwardRef(
       }
     }, [currentEffect?.subject, currentEffect?.payload]);
 
+    // Keep track of the natural image size
     React.useEffect(() => {
       // Prefer an explicit width/height from the document data
       if (typeof version.width === 'number' && typeof version.height === 'number') {
@@ -411,6 +418,7 @@ const ImageVersion = React.forwardRef(
       return () => imageRef.current && imageRef.current.removeEventListener('load', handleImageLoaded);
     }, [imageRef.current]);
 
+    // Resize the image to fit the available space
     React.useEffect(() => {
       if (inView) {
         const availableBounds = wrapperRef.current.parentNode.getBoundingClientRect();
