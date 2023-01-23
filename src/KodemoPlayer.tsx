@@ -207,12 +207,16 @@ function Root({
   style,
   ...props
 }: KodemoPlayerRootProps) {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const scrolledRef = React.useRef(false);
-  const { setScrollContainer, setScrollTop, setDimensions, setOffset } = useKodemoState.getState();
   const dimensions = useKodemoState(KodemoStateSelectors.dimensions);
   const offset = useKodemoState(KodemoStateSelectors.offset);
   const layoutComplete = useKodemoState((state) => state.layoutComplete);
+  const setScrollContainer = useKodemoState((state) => state.setScrollContainer);
+  const setScrollTop = useKodemoState((state) => state.setScrollTop);
+  const setDimensions = useKodemoState((state) => state.setDimensions);
+  const setOffset = useKodemoState((state) => state.setOffset);
+
+  const ref = React.useRef<HTMLDivElement>(null);
+  const scrolledRef = React.useRef(false);
 
   const hasExplicitSize = typeof width === 'number' && typeof height === 'number';
 
@@ -342,7 +346,7 @@ function Root({
   );
 }
 
-export interface IPlayerRendererProps {
+export interface PlayerRendererProps {
   /**
    * Slot for an optional menu element that should be added next
    * to the story.
@@ -350,7 +354,7 @@ export interface IPlayerRendererProps {
   menu?: ReactNode;
 }
 
-function PlayerRenderer({ menu }: IPlayerRendererProps) {
+function PlayerRenderer({ menu }: PlayerRendererProps) {
   return (
     <>
       <StoryWrapper>
