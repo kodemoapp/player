@@ -26,7 +26,7 @@ export const INLINE_STYLES = {
     fontSize: '0.95em',
     color: '#444',
   },
-  link: {
+  a: {
     color: theme.colors.link,
     textDecoration: 'underline',
     '&:hover': {
