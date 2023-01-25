@@ -16,7 +16,7 @@ const StyledContent = styled(Subject.Content)`
   }
 `;
 
-const MathSubject = (props) => {
+export const MathSubject = (props) => {
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
   const versionsRef = React.useRef([]);
 
@@ -60,5 +60,3 @@ const MathSubjectVersion = React.forwardRef(({ value, versionId, ...props }, for
 
   return <div className={classes.join(' ')} ref={pageElement} {...props}></div>;
 });
-
-export default MathSubject;

@@ -152,7 +152,7 @@ const StyledVersion = styled.div`
   }
 `;
 
-const ImageSubject = React.forwardRef((props, forwardRef) => {
+export const ImageSubject = React.forwardRef((props, forwardRef) => {
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
   const currentEffect = useKodemoState(KodemoStateSelectors.currentEffect);
 
@@ -528,5 +528,3 @@ const ImageVersion = React.forwardRef(
     );
   }
 );
-
-export default ImageSubject;

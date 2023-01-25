@@ -89,7 +89,7 @@ interface ICodeSubject extends ISubject {
   language?: string;
 }
 
-const CodeSubject = ({ subjectId, ...props }: any) => {
+export const CodeSubject = ({ subjectId, ...props }: any) => {
   const subject: ICodeSubject = useKodemoState((state) => DocumentSelectors.subject(state, subjectId));
   const currentEffect = useKodemoState((state) => state.currentEffect);
 
@@ -252,5 +252,3 @@ const CodeVersion = React.forwardRef(
 
 // TODO Use CodeEditor once it has types
 const CodeEditorWithoutTypes: any = CodeEditor;
-
-export default CodeSubject;

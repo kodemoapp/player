@@ -32,7 +32,7 @@ const StyledContent = styled(Subject.Content)`
   }
 `;
 
-const IframeSubject = React.forwardRef((props, forwardRef) => {
+export const IframeSubject = React.forwardRef((props, forwardRef) => {
   const wrapperRef = React.useRef();
   const iframeRef = React.useRef();
   const subject = useKodemoState((state) => DocumentSelectors.subject(state, props.subjectId));
@@ -68,5 +68,3 @@ const IframeSubject = React.forwardRef((props, forwardRef) => {
     </StyledContent>
   );
 });
-
-export default IframeSubject;
