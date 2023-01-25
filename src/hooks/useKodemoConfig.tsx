@@ -1,8 +1,7 @@
 import merge from 'lodash/merge';
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
-import SubjectType from '../enum/SubjectType';
-import { CodeSubject, IframeSubject, ImageSubject, MathSubject } from '../subjects';
+import SubjectType, { subjectDictionary } from '../enum/SubjectType';
 import { getExtensionFromFilename } from '../util/file';
 
 export interface ISubjectFormatDefinition {
@@ -95,24 +94,7 @@ const defaultConfig: IKodemoConfig = {
     { type: SubjectType.IMAGE, extensions: ['png', 'jpg', 'jpeg', 'gif', 'webp'] },
   ],
 
-  subjectComponents: {
-    [SubjectType.CODE]: {
-      component: CodeSubject,
-      versioned: true,
-    },
-    [SubjectType.MATH]: {
-      component: MathSubject,
-      versioned: false,
-    },
-    [SubjectType.IMAGE]: {
-      component: ImageSubject,
-      versioned: true,
-    },
-    [SubjectType.IFRAME]: {
-      component: IframeSubject,
-      versioned: false,
-    },
-  },
+  subjectComponents: subjectDictionary,
 };
 
 const useKodemoConfig = create(
