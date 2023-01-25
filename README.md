@@ -70,6 +70,13 @@ yarn test
 yarn build
 ```
 
+### Adding New Subject Types
+
+Each subject in Kodemo is its own React component. You can easily add your own subject types by following these steps:
+1. Create your subject component in the [subjects](https://github.com/kodemoapp/player/tree/master/src/subjects) directory. I recommend using [AbstractSubject](https://github.com/kodemoapp/player/tree/master/src/subjects/AbstractSubject.jsx) as a starting point.
+2. Export your subject from [subjects/index.ts](https://github.com/kodemoapp/player/tree/master/src/subjects/index.ts).
+3. Add your subject to [enum/SubjectType.ts](https://github.com/kodemoapp/player/tree/master/src/enum/SubjectType.ts).
+
 ### Terminology
 
 If you're planning to work with the Kodemo source here are a few key concepts and names that are good to know about.
