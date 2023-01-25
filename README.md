@@ -7,7 +7,7 @@
 # Kodemo
 
 Kodemo is a new format for more engaging and interactive technical documentation. It's great for tutorials and walkthroughs.
-- 🔗 Learn more at [kodemo.com](https://komdeo.com)
+- 🔗 Learn more at [kodemo.com](https://kodemo.com)
 - 👉 Try a [live demo](https://kodemo.com/docs/what-is-kodemo)
 - 👀 Follow [@kodemoapp](https://twitter.com/kodemoapp)
 
