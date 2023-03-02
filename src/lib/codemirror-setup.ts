@@ -39,10 +39,9 @@ import { php } from '@codemirror/lang-php';
 // import { css } from '@codemirror/legacy-modes/mode/css';
 import { python } from '@codemirror/legacy-modes/mode/python';
 import { xml } from '@codemirror/legacy-modes/mode/xml';
-import { cpp, java } from '@codemirror/legacy-modes/mode/clike';
+import { c, cpp, csharp, java, dart, kotlin } from '@codemirror/legacy-modes/mode/clike';
 import { rust } from '@codemirror/legacy-modes/mode/rust';
 import { go } from '@codemirror/legacy-modes/mode/go';
-import { kotlin } from '@codemirror/legacy-modes/mode/clike';
 import { ruby } from '@codemirror/legacy-modes/mode/ruby';
 import { shell } from '@codemirror/legacy-modes/mode/shell';
 import { swift } from '@codemirror/legacy-modes/mode/swift';
@@ -78,7 +77,10 @@ const languageMap = {
   java: () => StreamLanguage.define(java),
   python: () => StreamLanguage.define(python),
   xml: () => StreamLanguage.define(xml),
+  c: () => StreamLanguage.define(c),
   cpp: () => StreamLanguage.define(cpp),
+  csharp: () => StreamLanguage.define(csharp),
+  dart: () => StreamLanguage.define(dart),
   rust: () => StreamLanguage.define(rust),
 
   go: () => StreamLanguage.define(go),

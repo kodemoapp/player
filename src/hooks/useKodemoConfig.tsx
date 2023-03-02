@@ -69,8 +69,11 @@ const defaultConfig: IKodemoConfig = {
   compareImages: true,
 
   subjectFormats: [
+    { type: SubjectType.CODE, extensions: ['c'], language: 'c', label: 'C' },
+    { type: SubjectType.CODE, extensions: ['cs'], language: 'csharp', label: 'C#' },
     { type: SubjectType.CODE, extensions: ['cpp', 'cxx'], language: 'cpp', label: 'C++' },
     { type: SubjectType.CODE, extensions: ['css'], language: 'css', label: 'CSS' },
+    { type: SubjectType.CODE, extensions: ['dart'], language: 'dart', label: 'Dart' },
     { type: SubjectType.CODE, extensions: ['go'], language: 'go', label: 'Go' },
     { type: SubjectType.CODE, extensions: ['html'], language: 'html', label: 'HTML' },
     { type: SubjectType.CODE, extensions: ['java', 'class'], language: 'java', label: 'Java' },
