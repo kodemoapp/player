@@ -51,6 +51,18 @@ const StyledHeader = styled.header`
 const StyledTabs = styled.div`
   display: flex;
   overflow: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 `;
 
 const StyledTab = styled.button<{ active: boolean }>`

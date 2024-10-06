@@ -123,6 +123,13 @@ const StyledRoot = styled.div<{
   background-color: ${(props) => props.theme.colors.bgStory};
   color: ${(props) => props.theme.colors.text};
 
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+
   &,
   * {
     box-sizing: border-box;

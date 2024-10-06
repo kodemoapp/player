@@ -606,10 +606,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@kodemo/util@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@kodemo/util/-/util-0.3.1.tgz#206816cd43c2d43ee0a26d6058d4410138b890e1"
-  integrity sha512-qgRQuJZ+vfKoHPj4JeVxEW1v3sbP/saCtil6PCJdUzJ8CHGFQtwlmRfdPR/jhOgZiQyPS02Wwh7Th7hPGTgXYA==
+"@kodemo/util@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@kodemo/util/-/util-0.3.2.tgz#263e7fce7a1cd5e3fc87f5e011027a30e05f072b"
+  integrity sha512-s4Ds28uhuhaI93237mv6S1y5uRpXC4bqMr5gBeLwaNyRCbULGIQBNAUbQ9qKMv7aVd7PNgqvfMGSrFtYriz+oQ==
   dependencies:
     "@radix-ui/colors" "^0.1.8"
     "@radix-ui/react-dialog" "^1.0.2"
